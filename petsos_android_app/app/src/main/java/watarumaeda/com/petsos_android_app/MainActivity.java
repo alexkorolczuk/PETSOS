@@ -32,11 +32,6 @@ public class MainActivity extends AppCompatActivity
 
         setData();  // Set data
         initViews(); // initialize views
-
-        // debug to check if everything is calling and working:
-//        for (int i = 0; i <mName.size() ; i++) {
-//            Log.d(TAG, "onCreate" + mName.get(i));
-//        }
     }
 
     // Data
@@ -47,7 +42,7 @@ public class MainActivity extends AppCompatActivity
 
         //instead of objects with names - just sample data with name + number
         for (int i = 0; i < 6 ; i++) {
-            mName.add("Name of the dog" + i);
+            mName.add("Cat" + i);
         }
 
         for (int i = 0; i < 6; i++) {
