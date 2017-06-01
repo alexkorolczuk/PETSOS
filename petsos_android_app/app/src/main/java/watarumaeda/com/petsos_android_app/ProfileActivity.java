@@ -2,6 +2,7 @@ package watarumaeda.com.petsos_android_app;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,11 +15,28 @@ import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity
 {
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        /*
+
+       HERE:
+       we are catching the intent with age and name, but not the photo.
+       BTW in acvitity_profile.xml I removed the source and passed just empty id pet_image.
+         */
+        Intent intent = getIntent();
+        String name = intent.getStringExtra(TimelineAdapter.EXTRA_NAME);
+        String age = intent.getStringExtra(TimelineAdapter.EXTRA_AGE);
+
+       TextView mNameTextView = (TextView) findViewById(R.id.name);
+        mNameTextView.setText(name);
+        TextView mAgeTextView = (TextView) findViewById(R.id.txtv_sammary);
+        mAgeTextView.setText(age);
+
 
         // Add actions
         addActions();
