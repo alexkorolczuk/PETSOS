@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "947881750313",
+    "firebase_url": "https://petsos-377e0.firebaseio.com",
+    "project_id": "petsos-377e0",
+    "storage_bucket": "petsos-377e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947881750313:android:56f1e1e4a8b12c37",
+        "android_client_info": {
+          "package_name": "watarumaeda.com.petsos_android_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947881750313-v495gsvg4452kaskvjs15chva5nngjla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPWf4979a7qkB3-YMqhQbBuEDw_DugfTs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

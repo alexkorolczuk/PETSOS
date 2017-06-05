@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity
 
         setData();  // Set data
         initViews(); // initialize views
+
+        ServiceUtil.shared().push();
     }
 
     // Data
