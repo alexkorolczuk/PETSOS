@@ -1,10 +1,8 @@
 package watarumaeda.com.petsos_android_app;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.provider.MediaStore;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,12 +35,23 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(TimelineAdapter.ViewHolder holder, int position)
+    public void onBindViewHolder(final TimelineAdapter.ViewHolder holder, int position)
     {
         //hey, viewholder - ustawianie textu w holderze i loop przez nasz ciag danych
         holder.mName.setText(pets.get(position).name);
         holder.mAge.setText(pets.get(position).age);
         holder.android_image_urls.setImageResource(R.drawable.place_holder);
+
+        // Download image
+        ServiceUtil.shared().getPetImage(pets.get(position).img_url, new PetImageCallback() {
+            @Override
+            public void getPetImageCallback(Boolean success, Bitmap image) {
+                if (success)
+                {
+                    holder.android_image_urls.setImageBitmap(image);
+                }
+            }
+        });
     }
 
     @Override

@@ -1,10 +1,9 @@
 package watarumaeda.com.petsos_android_app;
 
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -15,24 +14,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.UUID;
-
-import static watarumaeda.com.petsos_android_app.R.drawable.cat1;
 
 interface PetsCallback {
     void getPetsCallback(Boolean success, ArrayList<Pet> pets);
 }
 
 interface PetImageCallback {
-    void getPetImageCallback(Boolean success, ArrayList<Pet> pets);
+    void getPetImageCallback(Boolean success, Bitmap image);
 }
 
 public class ServiceUtil
@@ -79,6 +68,24 @@ public class ServiceUtil
     // Storage
     public void getPetImage(String img_name, final PetImageCallback callback)
     {
+        StorageReference imageRef = storageRef.child(img_name);
 
+        // Download image
+        final long ONE_MEGABYTE = 1024 * 1024;
+        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                if (bytes != null) {
+                    Bitmap image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    callback.getPetImageCallback(true, image);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                callback.getPetImageCallback(false, Bitmap.createBitmap(0,0,Bitmap.Config.ARGB_8888));
+            }
+        });
     }
 }
