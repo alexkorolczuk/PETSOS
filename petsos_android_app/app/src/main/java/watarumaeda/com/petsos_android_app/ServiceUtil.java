@@ -31,6 +31,10 @@ interface PetsCallback {
     void getPetsCallback(Boolean success, ArrayList<Pet> pets);
 }
 
+interface PetImageCallback {
+    void getPetImageCallback(Boolean success, ArrayList<Pet> pets);
+}
+
 public class ServiceUtil
 {
     // Singleton
@@ -70,5 +74,11 @@ public class ServiceUtil
                 }
             }
         );
+    }
+
+    // Storage
+    public void getPetImage(String img_name, final PetImageCallback callback)
+    {
+
     }
 }
