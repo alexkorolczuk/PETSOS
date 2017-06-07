@@ -13,19 +13,18 @@ public class Pet
     public String breed;
     public String age;
 
-    // Parse json data to pet data class
-    public static Pet toPet(Map<String, String> map)
+    // Constractor
+    public Pet() {}
+    public Pet(String id,  String img_url,  String name,  String breed, String age)
     {
-        Pet p = new Pet();
-        p.id = map.get("id");
-        p.img_url = map.get("img_url");
-        p.name = map.get("name");
-        p.breed = map.get("breed");
-        p.age = map.get("age ");
-
-        return p;
+        this.id = id;
+        this.img_url = img_url;
+        this.name = name;
+        this.breed = breed;
+        this.age = age;
     }
 
+    // Supporting function
     public Map<String, String> toMap()
     {
         Map<String, String> map = new HashMap<String, String>() {

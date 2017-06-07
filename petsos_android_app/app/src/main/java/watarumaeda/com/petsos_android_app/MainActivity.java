@@ -26,21 +26,28 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Fetch pets data
-        ServiceUtil.shared().getPetData(new PetsCallback() {
-            @Override
-            public void getPetsData(Boolean success, ArrayList<Pet> pets) {
-
-            }
-        });
-
-
-        // recyclerView initialization
+        // RecyclerView initialization
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new TimelineAdapter(ServiceUtil.shared().getTestData());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+
+        // Fetch pets data from database
+        ServiceUtil.shared().getPet(new PetsCallback() {
+            @Override
+            public void getPetsCallback(Boolean success, ArrayList<Pet> pets)
+            {
+                if (success)
+                {
+                    // Set data
+                    mAdapter = new TimelineAdapter(pets);
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+                else
+                {
+                    // TODO: Show error message
+                }
+            }
+        });
     }
 }
