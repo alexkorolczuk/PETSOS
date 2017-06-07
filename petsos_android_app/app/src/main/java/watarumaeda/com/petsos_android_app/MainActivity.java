@@ -15,61 +15,39 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
 {
     private static final String TAG = "MainActivity";
-    private ArrayList <String> mName;
-    private ArrayList <String> mAge;
-    private ArrayList<Drawable> android_image_urls;
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
 
-    // Controller
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setData();  // Set data
-        initViews(); // initialize views
-
-        ServiceUtil.shared().push();
-    }
-
-    // Data
-    private void setData()
-    {
-        mName = new ArrayList<>();
-        mAge =  new ArrayList<>();
-
-        //instead of objects with names - just sample data with name + number
-        for (int i = 0; i < 6 ; i++) {
-            mName.add("Cat" + i);
-        }
-
-        for (int i = 0; i < 6; i++) {
-            mAge.add("X" + i);
-        }
-
-        // Image array
-        android_image_urls = new  ArrayList<Drawable>();
-        android_image_urls.add(getDrawable(R.drawable.cat1));
-        android_image_urls.add(getDrawable(R.drawable.cat2));
-        android_image_urls.add(getDrawable(R.drawable.cat3));
-        android_image_urls.add(getDrawable(R.drawable.cat5));
-        android_image_urls.add(getDrawable(R.drawable.cat6));
-        android_image_urls.add(getDrawable(R.drawable.cat7));
-    }
-
-    // View
-    private void initViews()
-    {
-        // recyclerView initialization
+        // RecyclerView initialization
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new TimelineAdapter(mName, mAge, android_image_urls);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+
+        // Fetch pets data from database
+        ServiceUtil.shared().getPet(new PetsCallback() {
+            @Override
+            public void getPetsCallback(Boolean success, ArrayList<Pet> pets)
+            {
+                if (success)
+                {
+                    // Set data
+                    mAdapter = new TimelineAdapter(pets);
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+                else
+                {
+                    // TODO: Show error message
+                }
+            }
+        });
     }
 }
