@@ -19,28 +19,20 @@ import java.util.ArrayList;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder>
 {
-   private  ArrayList<String> mName;
-    private ArrayList<String> mAge;
-  private   ArrayList<Drawable> android_image_urls;
+    private ArrayList<Pet> pets;
     public static final String EXTRA_NAME = "com.watarumaeda.com.petsos_android_app.NAME";
     public static final String EXTRA_AGE = "com.watarumaeda.com.petsos_android_app.AGE";
     public static final String EXTRA_PHOTO = "com.watarumaeda.com.petsos_android_app.PHOTO";
 
-
-
-
     //constructor, ze
-    public TimelineAdapter(ArrayList<String> mName, ArrayList<String> mAge, ArrayList<Drawable> android)
-    {
-        this.mName = mName;
-        this.mAge = mAge;
-        this.android_image_urls = android;
+    public TimelineAdapter(ArrayList<Pet> pets)  {
+        this.pets = pets;
     }
 
     @Override
-    public TimelineAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TimelineAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pet_card, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -48,20 +40,15 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     public void onBindViewHolder(TimelineAdapter.ViewHolder holder, int position)
     {
         //hey, viewholder - ustawianie textu w holderze i loop przez nasz ciag danych
-        holder.mName.setText(mName.get(position));
-        holder.mAge.setText(mAge.get(position));
-        holder.android_image_urls.setImageDrawable(android_image_urls.get(position));
+        holder.mName.setText(pets.get(position).name);
+        holder.mAge.setText(pets.get(position).age);
+        holder.android_image_urls.setImageResource(R.drawable.place_holder);
     }
 
     @Override
     public int getItemCount()
     {
-        //return mName.size() + mAge.size() + android_image_urls.size();
-        if (mAge.get(0) != null && mName != null && android_image_urls != null) {
-            return mName.size();
-        } else {
-            return 0;
-        }
+        return pets.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
@@ -70,7 +57,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         public TextView mAge;
         public ImageView android_image_urls;
 
-
         public ViewHolder(View itemView)
         {
             super(itemView);
@@ -78,9 +64,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             mAge = (TextView) itemView.findViewById(R.id.dog_age);
             android_image_urls = (ImageView) itemView.findViewById(R.id.catimage);
 
-
             /* HERE
-            So in my single viewHolder I'm getting 2 single strings with name and age
+            So in my single viewHolder I'm getting 2 single strings with name and           age
             and passing them as EXTRAS to our ProfileActivity. It doesnt work with images though.
             Operating on bitmaps is not the best way for us coz It's gonna be really slow...
             Saving id of the current clicked photo and passing just id? or source? I dont know:(
@@ -97,6 +82,4 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                     intent.putExtra(EXTRA_AGE, age);
                     v.getContext().startActivity(intent);
         }});
-
-
 }}}
