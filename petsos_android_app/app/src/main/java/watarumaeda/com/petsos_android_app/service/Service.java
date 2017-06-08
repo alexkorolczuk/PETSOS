@@ -1,4 +1,4 @@
-package watarumaeda.com.petsos_android_app;
+package watarumaeda.com.petsos_android_app.service;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,19 +16,15 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
-interface PetsCallback {
-    void getPetsCallback(Boolean success, ArrayList<Pet> pets);
-}
+import watarumaeda.com.petsos_android_app.common.PetImageCallback;
+import watarumaeda.com.petsos_android_app.common.PetsCallback;
+import watarumaeda.com.petsos_android_app.model.Pet;
 
-interface PetImageCallback {
-    void getPetImageCallback(Boolean success, Bitmap image);
-}
-
-public class ServiceUtil
+public class Service
 {
     // Singleton
-    private static final ServiceUtil instance = new ServiceUtil();
-    public static ServiceUtil shared() {
+    private static final Service instance = new Service();
+    public static Service shared() {
         return instance;
     }
 
@@ -44,24 +40,24 @@ public class ServiceUtil
     public void getPet(final PetsCallback callback)
     {
         mDatabase.child("pets").addListenerForSingleValueEvent(
-            new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-                {
-                    ArrayList<Pet> pets = new ArrayList<Pet>();
-                    for (DataSnapshot child : dataSnapshot.getChildren())  {
-                        Log.d("Child", child.getValue().toString());
-                        pets.add(child.getValue(Pet.class));
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        ArrayList<Pet> pets = new ArrayList<Pet>();
+                        for (DataSnapshot child : dataSnapshot.getChildren())  {
+                            Log.d("Child", child.getValue().toString());
+                            pets.add(child.getValue(Pet.class));
+                        }
+                        callback.getPetsCallback(true, pets);
                     }
-                    callback.getPetsCallback(true, pets);
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w("getUser:onCancelled", databaseError.toException());
-                    callback.getPetsCallback(false, new ArrayList<Pet>());
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w("getUser:onCancelled", databaseError.toException());
+                        callback.getPetsCallback(false, new ArrayList<Pet>());
+                    }
                 }
-            }
         );
     }
 

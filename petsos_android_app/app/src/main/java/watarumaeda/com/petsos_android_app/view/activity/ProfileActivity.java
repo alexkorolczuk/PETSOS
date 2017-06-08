@@ -1,17 +1,16 @@
-package watarumaeda.com.petsos_android_app;
+package watarumaeda.com.petsos_android_app.view.activity;
 
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
+
+import watarumaeda.com.petsos_android_app.R;
+import watarumaeda.com.petsos_android_app.view.adapter.TimelineAdapter;
 
 public class ProfileActivity extends AppCompatActivity
 {

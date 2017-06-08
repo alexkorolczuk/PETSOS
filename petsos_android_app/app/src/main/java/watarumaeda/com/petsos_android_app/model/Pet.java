@@ -1,4 +1,4 @@
-package watarumaeda.com.petsos_android_app;
+package watarumaeda.com.petsos_android_app.model;
 
 import java.util.HashMap;
 import java.util.Map;
