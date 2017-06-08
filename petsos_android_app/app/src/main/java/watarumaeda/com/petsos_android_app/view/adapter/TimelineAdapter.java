@@ -1,4 +1,4 @@
-package watarumaeda.com.petsos_android_app;
+package watarumaeda.com.petsos_android_app.view.adapter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import watarumaeda.com.petsos_android_app.service.Service;
+import watarumaeda.com.petsos_android_app.model.Pet;
+import watarumaeda.com.petsos_android_app.view.activity.ProfileActivity;
+import watarumaeda.com.petsos_android_app.R;
+import watarumaeda.com.petsos_android_app.common.PetImageCallback;
 
 /**
  * Created by aleksandrakorolczuk1 on 2017-05-30.
@@ -43,7 +49,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         holder.android_image_urls.setImageResource(R.drawable.place_holder);
 
         // Download image
-        ServiceUtil.shared().getPetImage(pets.get(position).img_url, new PetImageCallback() {
+        Service.shared().getPetImage(pets.get(position).img_url, new PetImageCallback() {
             @Override
             public void getPetImageCallback(Boolean success, Bitmap image) {
                 if (success)

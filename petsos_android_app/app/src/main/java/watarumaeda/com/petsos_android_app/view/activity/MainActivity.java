@@ -1,15 +1,19 @@
-package watarumaeda.com.petsos_android_app;
+package watarumaeda.com.petsos_android_app.view.activity;
 
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import java.util.ArrayList;
+
+import watarumaeda.com.petsos_android_app.service.Service;
+import watarumaeda.com.petsos_android_app.model.Pet;
+import watarumaeda.com.petsos_android_app.R;
+import watarumaeda.com.petsos_android_app.common.PetsCallback;
+import watarumaeda.com.petsos_android_app.view.adapter.TimelineAdapter;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MainActivity extends AppCompatActivity
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // Fetch pets data from database
-        ServiceUtil.shared().getPet(new PetsCallback() {
+        Service.shared().getPet(new PetsCallback() {
             @Override
             public void getPetsCallback(Boolean success, ArrayList<Pet> pets)
             {
