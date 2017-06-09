@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import watarumaeda.com.petsos_android_app.model.PetDetail;
 import watarumaeda.com.petsos_android_app.service.Service;
 import watarumaeda.com.petsos_android_app.model.Pet;
 import watarumaeda.com.petsos_android_app.R;
@@ -36,8 +37,10 @@ public class MainActivity extends AppCompatActivity
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+//        PetDetail.getTestPetsDetail();
+
         // Fetch pets data from database
-        Service.shared().getPet(new PetsCallback() {
+        Service.shared().getPets(new PetsCallback() {
             @Override
             public void getPetsCallback(Boolean success, ArrayList<Pet> pets)
             {

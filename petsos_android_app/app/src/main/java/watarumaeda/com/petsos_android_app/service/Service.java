@@ -16,9 +16,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
+import watarumaeda.com.petsos_android_app.common.PetCallback;
+import watarumaeda.com.petsos_android_app.common.PetDetailsCallback;
 import watarumaeda.com.petsos_android_app.common.PetImageCallback;
 import watarumaeda.com.petsos_android_app.common.PetsCallback;
 import watarumaeda.com.petsos_android_app.model.Pet;
+import watarumaeda.com.petsos_android_app.model.PetDetail;
 
 public class Service
 {
@@ -33,11 +36,9 @@ public class Service
     private StorageReference storageRef = FirebaseStorage.getInstance().getReferenceFromUrl("gs://petsos-377e0.appspot.com");
 
     // Database
-    public void pushPetToDatabase(Pet p)
-    {
-        mDatabase.child("pets/" + p.id).setValue(p.toMap());
-    }
-    public void getPet(final PetsCallback callback)
+    public void postPet(Pet p) { mDatabase.child("pets/" + p.id).setValue(p.toMap()); }
+    public void postPetDetail(PetDetail p)  { mDatabase.child("petDetails/" + p.id).setValue(p.toMap()); }
+    public void getPets(final PetsCallback callback)
     {
         mDatabase.child("pets").addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -56,6 +57,49 @@ public class Service
                     public void onCancelled(DatabaseError databaseError) {
                         Log.w("getUser:onCancelled", databaseError.toException());
                         callback.getPetsCallback(false, new ArrayList<Pet>());
+                    }
+                }
+        );
+    }
+
+    public void getPet(String id, final PetCallback callback)
+    {
+        mDatabase.child("pets/" + id).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        Pet p = dataSnapshot.getValue(Pet.class);
+                        callback.getPetCallback(true, p);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w("getUser:onCancelled", databaseError.toException());
+                        callback.getPetCallback(false, new Pet());
+                    }
+                }
+        );
+    }
+
+    public void getPetDetails(final PetDetailsCallback callback)
+    {
+        mDatabase.child("petDetails").addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        ArrayList<PetDetail> petDetails = new ArrayList<PetDetail>();
+                        for (DataSnapshot child : dataSnapshot.getChildren())  {
+                            Log.d("Child", child.getValue().toString());
+                            petDetails.add(child.getValue(PetDetail.class));
+                        }
+                        callback.getPetDetailssCallback(true, petDetails);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        callback.getPetDetailssCallback(false, new ArrayList<PetDetail>());
                     }
                 }
         );

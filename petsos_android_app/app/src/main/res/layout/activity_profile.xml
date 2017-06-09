@@ -19,10 +19,10 @@
 
             <ImageView
                 android:id="@+id/pet_image"
-                android:src="@drawable/cat1"
+                android:src="@drawable/place_holder"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="300dp" />
 
             <android.support.v7.widget.CardView
                 xmlns:android="http://schemas.android.com/apk/res/android"
