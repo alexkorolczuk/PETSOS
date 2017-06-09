@@ -15,9 +15,12 @@ import java.util.ArrayList;
 
 import watarumaeda.com.petsos_android_app.R;
 import watarumaeda.com.petsos_android_app.common.PetCallback;
+import watarumaeda.com.petsos_android_app.common.PetDetailCallback;
+import watarumaeda.com.petsos_android_app.common.PetDetailsCallback;
 import watarumaeda.com.petsos_android_app.common.PetImageCallback;
 import watarumaeda.com.petsos_android_app.common.PetsCallback;
 import watarumaeda.com.petsos_android_app.model.Pet;
+import watarumaeda.com.petsos_android_app.model.PetDetail;
 import watarumaeda.com.petsos_android_app.service.Service;
 import watarumaeda.com.petsos_android_app.view.adapter.TimelineAdapter;
 
@@ -48,13 +51,13 @@ public class ProfileActivity extends AppCompatActivity
     // UI
     private void setData()
     {
-        // Components
+        // Pet ID
+        String id = getID();
+
+        // Summaru components
         final TextView mTxtvName = (TextView) findViewById(R.id.name);
         final TextView mTxtvAge = (TextView) findViewById(R.id.txtv_sammary);
         final ImageView mImgvPet = (ImageView) findViewById(R.id.pet_image);
-
-        // Pet ID
-        String id = getID();
 
         // Get pet data -> set to components
         Service.shared().getPet(id, new PetCallback() {
@@ -76,6 +79,25 @@ public class ProfileActivity extends AppCompatActivity
             });
             }
         });
+
+        // Detail components
+//        final TextView mTxtvAbout = (TextView) findViewById(R.id.about);
+//        final TextView mTxtvSex = (TextView) findViewById(R.id.sex);
+//        final TextView mTxtvOwnerType = (TextView) findViewById(R.id.owner_type);
+//        final TextView mTxtvOtherPets = (TextView) findViewById(R.id.other_pets);
+//        final TextView mTxtvSize = (TextView) findViewById(R.id.size);
+//
+//        // Get pet summary data -> set to components
+//        Service.shared().getPetDetail(id, new PetDetailCallback() {
+//            @Override
+//            public void getPetDetailCallback(Boolean success, PetDetail pd) {
+//                mTxtvAbout.setText(pd.about);
+//                mTxtvSex.setText(pd.sex);
+//                mTxtvOwnerType.setText(pd.owner_type == 0 ? "Shelter" : "Rescue");
+//                mTxtvOtherPets.setText(pd.other_pets ? "OK" : "NO");
+//                mTxtvSize.setText(pd.size_type == 0 ? "Small" : "Medium");
+//            }
+//        });
     }
 
     // Action

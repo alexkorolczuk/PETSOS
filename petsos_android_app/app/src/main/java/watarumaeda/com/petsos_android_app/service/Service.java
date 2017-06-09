@@ -17,6 +17,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 import watarumaeda.com.petsos_android_app.common.PetCallback;
+import watarumaeda.com.petsos_android_app.common.PetDetailCallback;
 import watarumaeda.com.petsos_android_app.common.PetDetailsCallback;
 import watarumaeda.com.petsos_android_app.common.PetImageCallback;
 import watarumaeda.com.petsos_android_app.common.PetsCallback;
@@ -77,6 +78,25 @@ public class Service
                     public void onCancelled(DatabaseError databaseError) {
                         Log.w("getUser:onCancelled", databaseError.toException());
                         callback.getPetCallback(false, new Pet());
+                    }
+                }
+        );
+    }
+
+    public void getPetDetail(String id, final PetDetailCallback callback)
+    {
+        mDatabase.child("petDetails/" + id).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        PetDetail pd = dataSnapshot.getValue(PetDetail.class);
+                        callback.getPetDetailCallback(true, pd);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        callback.getPetDetailCallback(true, new PetDetail());
                     }
                 }
         );
