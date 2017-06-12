@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -81,23 +82,26 @@ public class ProfileActivity extends AppCompatActivity
         });
 
         // Detail components
-//        final TextView mTxtvAbout = (TextView) findViewById(R.id.about);
-//        final TextView mTxtvSex = (TextView) findViewById(R.id.sex);
-//        final TextView mTxtvOwnerType = (TextView) findViewById(R.id.owner_type);
-//        final TextView mTxtvOtherPets = (TextView) findViewById(R.id.other_pets);
-//        final TextView mTxtvSize = (TextView) findViewById(R.id.size);
-//
-//        // Get pet summary data -> set to components
-//        Service.shared().getPetDetail(id, new PetDetailCallback() {
-//            @Override
-//            public void getPetDetailCallback(Boolean success, PetDetail pd) {
-//                mTxtvAbout.setText(pd.about);
-//                mTxtvSex.setText(pd.sex);
-//                mTxtvOwnerType.setText(pd.owner_type == 0 ? "Shelter" : "Rescue");
-//                mTxtvOtherPets.setText(pd.other_pets ? "OK" : "NO");
-//                mTxtvSize.setText(pd.size_type == 0 ? "Small" : "Medium");
-//            }
-//        });
+        final TextView mTxtvAbout = (TextView) findViewById(R.id.about);
+        final TextView mTxtvSex = (TextView) findViewById(R.id.sex);
+        final TextView mTxtvOwnerType = (TextView) findViewById(R.id.owner_type);
+        final TextView mTxtvOtherPets = (TextView) findViewById(R.id.other_pets);
+        final TextView mTxtvSize = (TextView) findViewById(R.id.size);
+
+        // Get pet summary data -> set to components
+        Service.shared().getPetDetail(id, new PetDetailCallback() {
+            @Override
+            public void getPetDetailCallback(Boolean success, PetDetail pd) {
+                if (success)
+                {
+                    mTxtvAbout.setText(String.valueOf(pd.about));
+                    mTxtvSex.setText(String.valueOf(pd.sex));
+                    mTxtvOwnerType.setText(pd.owner_type == 0 ? "Shelter" : "Rescue");
+                    mTxtvOtherPets.setText(pd.other_pets ? "OK" : "NO");
+                    mTxtvSize.setText(pd.size_type == 0 ? "Small" : "Medium");
+                }
+            }
+        });
     }
 
     // Action
