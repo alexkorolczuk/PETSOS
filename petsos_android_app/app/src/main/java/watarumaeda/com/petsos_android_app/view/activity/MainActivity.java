@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -37,8 +39,6 @@ public class MainActivity extends AppCompatActivity
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-//        PetDetail.getTestPetsDetail();
-
         // Fetch pets data from database
         Service.shared().getPets(new PetsCallback() {
             @Override
@@ -54,6 +54,15 @@ public class MainActivity extends AppCompatActivity
                 {
                     // TODO: Show error message
                 }
+            }
+        });
+
+        // Add listner
+        ImageButton imgBtn = (ImageButton) findViewById(R.id.btn_add_pet);
+        imgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Show add pet screen
             }
         });
     }
