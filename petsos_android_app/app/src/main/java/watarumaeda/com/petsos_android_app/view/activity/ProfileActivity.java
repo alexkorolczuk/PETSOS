@@ -27,7 +27,6 @@ import watarumaeda.com.petsos_android_app.view.adapter.TimelineAdapter;
 
 public class ProfileActivity extends AppCompatActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -66,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity
             public void getPetCallback(Boolean success, Pet pet)
             {
             mTxtvName.setText(pet.name);
-            mTxtvAge.setText(pet.age);
+            mTxtvAge.setText(pet.breed + ", " + pet.age);
 
             // Download image
             Service.shared().getPetImage(pet.img_url, new PetImageCallback() {
@@ -95,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity
                 if (success)
                 {
                     mTxtvAbout.setText(String.valueOf(pd.about));
-                    mTxtvSex.setText(String.valueOf(pd.sex));
+                    mTxtvSex.setText(pd.sex == 0 ? "Male" : "Femail");
                     mTxtvOwnerType.setText(pd.owner_type == 0 ? "Shelter" : "Rescue");
                     mTxtvOtherPets.setText(pd.other_pets ? "OK" : "NO");
                     mTxtvSize.setText(pd.size_type == 0 ? "Small" : "Medium");

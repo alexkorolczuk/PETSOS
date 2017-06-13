@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">petsos_android_app</string>
+    <string-array name="array_owner_types">
+        <item>Family with kids</item>
+        <item>Likes outdoor activies</item>
+        <item> Experienced with rescued pets</item>
+        <item> Pet owner beginner</item>
+    </string-array>
+    <string-array name="array_pet_sizes">
+        <item>Very small</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Extra large</item>
+    </string-array>
 </resources>
