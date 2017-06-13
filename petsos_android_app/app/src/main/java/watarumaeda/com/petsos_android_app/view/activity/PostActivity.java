@@ -1,5 +1,6 @@
 package watarumaeda.com.petsos_android_app.view.activity;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,14 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -29,6 +27,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import watarumaeda.com.petsos_android_app.R;
+import watarumaeda.com.petsos_android_app.model.Pet;
+import watarumaeda.com.petsos_android_app.model.PetDetail;
+import watarumaeda.com.petsos_android_app.view.fragment.MissingDialogFlagment;
 
 public class PostActivity extends AppCompatActivity
 {
@@ -49,6 +50,8 @@ public class PostActivity extends AppCompatActivity
     private Spinner mOwnerTypeSpinner;
     private Spinner mSizeSpinner;
     private EditText mDescriptionEditText;
+
+    private Button mBtnPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -199,6 +202,52 @@ public class PostActivity extends AppCompatActivity
                 //
             }
         });
+
+
+        // ----- Post pet -------
+        mBtnPost = (Button) findViewById(R.id.btn_post);
+        mBtnPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (canPost()) {
+
+                }
+            }
+        });
+    }
+
+    private Boolean canPost()
+    {
+        if (mNameEditText.getText().length() == 0) {
+            DialogFragment newFragment = new MissingDialogFlagment("Data missing", "Please fill name field.");
+            newFragment.show(getFragmentManager(), "missing_name");
+            return false;
+        }
+        if (mAgeEditText.getText().length() == 0) {
+            DialogFragment newFragment = new MissingDialogFlagment("Data missing", "Please fill age field.");
+            newFragment.show(getFragmentManager(), "missing_age");
+            return false;
+        }
+        if (mDescriptionEditText.getText().length() == 0) {
+            DialogFragment newFragment = new MissingDialogFlagment("Data missing", "Please fill description field.");
+            newFragment.show(getFragmentManager(), "missing_description");
+            return false;
+        }
+
+        return true;
+    }
+
+    private Pet getPet()
+    {
+        Pet p = new Pet();
+
+        return  p;
+    }
+
+    private PetDetail getPetDetail()
+    {
+        PetDetail p = new PetDetail();
+        return  p;
     }
 
     @Override
