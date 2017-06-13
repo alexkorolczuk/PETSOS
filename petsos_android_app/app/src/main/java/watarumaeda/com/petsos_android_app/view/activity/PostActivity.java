@@ -1,5 +1,9 @@
 package watarumaeda.com.petsos_android_app.view.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,18 +19,24 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import watarumaeda.com.petsos_android_app.R;
 
 public class PostActivity extends AppCompatActivity
 {
+    private static int RESULT_LOAD_IMG = 1;
 
     private ImageButton mButton;
     private EditText mNameEditText;
+    private ImageView mPetImgv;
 
     private RadioGroup mSexRadioGroup;
     private RadioButton mSexFemale;
@@ -41,25 +51,28 @@ public class PostActivity extends AppCompatActivity
     private EditText mDescriptionEditText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.animaton_button);
         setContentView(R.layout.activity_post);
 
-        //-----------add photo button+ animation----------------
+
+        //-----------add photo button + animation----------------
+        mPetImgv = (ImageView) findViewById(R.id.pet_imgv);
         mButton = (ImageButton) findViewById(R.id.plus_button);
         mButton.setAnimation(myAnim);
-
-
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.startAnimation(myAnim);
+
+                // Show images from library
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
             }
         });
-
-
-
 
         //-----------edit name----------------
         mNameEditText = (EditText) findViewById(R.id.add_name_edit);
@@ -82,16 +95,17 @@ public class PostActivity extends AppCompatActivity
         //-----------check female or male----------------
 
         mSexRadioGroup = (RadioGroup) findViewById(R.id.radioSex);
-
-        mSexFemale = (RadioButton) findViewById(R.id.checkbox_female);
-        mSexFemale.setOnClickListener(new View.OnClickListener() {
+        mSexMale = (RadioButton) findViewById(R.id.checkbox_male);
+        mSexMale.setChecked(true);
+        mSexMale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-        mSexMale = (RadioButton) findViewById(R.id.checkbox_male);
-        mSexMale.setOnClickListener(new View.OnClickListener() {
+
+        mSexFemale = (RadioButton) findViewById(R.id.checkbox_female);
+        mSexFemale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -104,9 +118,6 @@ public class PostActivity extends AppCompatActivity
 //                Log.d("onCheckedChanged", Integer.toString(isChecked));
             }
         });
-
-
-
 
 
         //-----------edit age----------------
@@ -145,8 +156,8 @@ public class PostActivity extends AppCompatActivity
         //-----------check OK it other pets----------------
 
         mOKOTHERPETSRadiGroup = (RadioGroup) findViewById(R.id.radioOwner);
-
         mOKRadioButton = (RadioButton) findViewById(R.id.radio_OK);
+        mOKRadioButton.setChecked(true);
         mOKRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,10 +199,23 @@ public class PostActivity extends AppCompatActivity
                 //
             }
         });
+    }
 
-
-
-
-
+    @Override
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                mPetImgv.setImageBitmap(selectedImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(PostActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+        }else {
+            Toast.makeText(PostActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+        }
     }
 }
