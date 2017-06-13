@@ -1,5 +1,6 @@
 package watarumaeda.com.petsos_android_app.view.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -62,7 +63,10 @@ public class MainActivity extends AppCompatActivity
         imgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Show add pet screen
+
+                // Go to post screen
+                Intent intent = new Intent(v.getContext(), PostActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
     }
