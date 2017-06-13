@@ -17,7 +17,7 @@ android:layout_height="wrap_content">
         android:paddingTop="10dp">
 
         <ImageView
-            android:id="@+id/catimage"
+            android:id="@+id/img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -26,24 +26,24 @@ android:layout_height="wrap_content">
             android:scaleType="fitXY" />
 
         <TextView
-            android:id="@+id/dog_age"
+            android:id="@+id/age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="AGE"
             android:layout_marginRight="23dp"
             android:layout_marginEnd="23dp"
-            android:layout_below="@+id/catimage"
+            android:layout_below="@+id/img"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
         <TextView
-            android:id="@+id/dog_name"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="NAME"
             android:layout_marginLeft="19dp"
             android:layout_marginStart="19dp"
-            android:layout_below="@+id/catimage"
+            android:layout_below="@+id/img"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 

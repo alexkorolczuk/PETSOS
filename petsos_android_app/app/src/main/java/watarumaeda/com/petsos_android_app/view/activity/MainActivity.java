@@ -6,9 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
+import watarumaeda.com.petsos_android_app.model.PetDetail;
 import watarumaeda.com.petsos_android_app.service.Service;
 import watarumaeda.com.petsos_android_app.model.Pet;
 import watarumaeda.com.petsos_android_app.R;
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // Fetch pets data from database
-        Service.shared().getPet(new PetsCallback() {
+        Service.shared().getPets(new PetsCallback() {
             @Override
             public void getPetsCallback(Boolean success, ArrayList<Pet> pets)
             {
@@ -51,6 +54,15 @@ public class MainActivity extends AppCompatActivity
                 {
                     // TODO: Show error message
                 }
+            }
+        });
+
+        // Add listner
+        ImageButton imgBtn = (ImageButton) findViewById(R.id.btn_add_pet);
+        imgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Show add pet screen
             }
         });
     }

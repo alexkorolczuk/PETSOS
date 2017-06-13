@@ -19,17 +19,17 @@
 
             <ImageView
                 android:id="@+id/pet_image"
-                android:src="@drawable/cat1"
+                android:src="@drawable/place_holder"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="300dp" />
 
             <android.support.v7.widget.CardView
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 card_view:cardCornerRadius="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="185dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
@@ -54,12 +54,12 @@
                         android:layout_marginBottom="5dp" />
 
                     <TextView
+                        android:text="Breed\nage"
+                        android:id="@+id/txtv_sammary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Breed\nage"
                         android:textAlignment="center"
                         android:textColor="@color/darkGray"
-                        android:id="@+id/txtv_sammary"
                         android:textSize="20dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginLeft="15dp"
@@ -80,7 +80,7 @@
                             android:background="@color/cyan"
                             android:textColor="@color/white"
                             android:textSize="20dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="5dp"
                             android:layout_marginBottom="10dp"
@@ -109,7 +109,7 @@
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 card_view:cardCornerRadius="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
@@ -133,9 +133,10 @@
                         android:layout_marginBottom="5dp" />
 
                     <TextView
+                        android:text="he domestic cat[1][5] (Latin: Felis catus) is a small, typically furry, carnivorous mammal. They are often called house cats when kept as indoor pets or simply cats when there is no need to distinguish them from other felids and felines.[6] Cats are often valued by humans for companionship and for their ability to hunt vermin."
+                        android:id="@+id/about"
                         android:textSize="15dp"
                         android:textColor="@color/lightGray"
-                        android:text="he domestic cat[1][5] (Latin: Felis catus) is a small, typically furry, carnivorous mammal. They are often called house cats when kept as indoor pets or simply cats when there is no need to distinguish them from other felids and felines.[6] Cats are often valued by humans for companionship and for their ability to hunt vermin."
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
@@ -181,7 +182,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:text="Location:"
+                            android:text="Sex:"
                             android:textColor="@color/darkGray"
                             android:textSize="18dp"
                             android:textAlignment="center"
@@ -193,7 +194,8 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:text="Vancouver"
+                            android:text="Male"
+                            android:id="@+id/sex"
                             android:textColor="@color/lightGray"
                             android:textSize="18dp"
                             android:textAlignment="center"
@@ -212,7 +214,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:text="Location:"
+                            android:text="Owner type:"
                             android:textColor="@color/darkGray"
                             android:textSize="18dp"
                             android:textAlignment="center"
@@ -224,7 +226,8 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:text="Vancouver"
+                            android:text="Shelter"
+                            android:id="@+id/owner_type"
                             android:textColor="@color/lightGray"
                             android:textSize="18dp"
                             android:textAlignment="center"
@@ -243,7 +246,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:text="Location:"
+                            android:text="Other pets:"
                             android:textColor="@color/darkGray"
                             android:textSize="18dp"
                             android:textAlignment="center"
@@ -255,7 +258,8 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:text="Vancouver"
+                            android:text="OK"
+                            android:id="@+id/other_pets"
                             android:textColor="@color/lightGray"
                             android:textSize="18dp"
                             android:textAlignment="center"
@@ -274,7 +278,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:text="Location:"
+                            android:text="Size type:"
                             android:textColor="@color/darkGray"
                             android:textSize="18dp"
                             android:textAlignment="center"
@@ -286,7 +290,8 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:text="Vancouver"
+                            android:text="Medium"
+                            android:id="@+id/size"
                             android:textColor="@color/lightGray"
                             android:textSize="18dp"
                             android:textAlignment="center"
@@ -299,36 +304,6 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:text="Location:"
-                            android:textColor="@color/darkGray"
-                            android:textSize="18dp"
-                            android:textAlignment="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_marginBottom="5dp"/>
-
-                        <TextView
-                            android:text="Vancouver"
-                            android:textColor="@color/lightGray"
-                            android:textSize="18dp"
-                            android:textAlignment="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_marginBottom="5dp"/>
-
-                    </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
