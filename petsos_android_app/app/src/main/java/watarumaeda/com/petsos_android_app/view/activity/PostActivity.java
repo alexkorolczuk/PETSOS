@@ -2,9 +2,11 @@ package watarumaeda.com.petsos_android_app.view.activity;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.SyncStateContract;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.UUID;
 
+import watarumaeda.com.petsos_android_app.Manifest;
 import watarumaeda.com.petsos_android_app.R;
 import watarumaeda.com.petsos_android_app.common.PetImageUploadCallback;
 import watarumaeda.com.petsos_android_app.model.Pet;
