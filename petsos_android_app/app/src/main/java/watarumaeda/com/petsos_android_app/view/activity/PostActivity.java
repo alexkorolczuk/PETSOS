@@ -25,11 +25,16 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.UUID;
 
 import watarumaeda.com.petsos_android_app.R;
+import watarumaeda.com.petsos_android_app.common.PetImageUploadCallback;
 import watarumaeda.com.petsos_android_app.model.Pet;
 import watarumaeda.com.petsos_android_app.model.PetDetail;
+import watarumaeda.com.petsos_android_app.service.Service;
 import watarumaeda.com.petsos_android_app.view.fragment.MissingDialogFlagment;
+
+import static android.app.Activity.RESULT_OK;
 
 public class PostActivity extends AppCompatActivity
 {
@@ -93,7 +98,6 @@ public class PostActivity extends AppCompatActivity
                 //
             }
         });
-
 
         //-----------check female or male----------------
 
@@ -209,8 +213,36 @@ public class PostActivity extends AppCompatActivity
         mBtnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (canPost()) {
+                if (canPost()) upload();
+            }
+        });
+    }
 
+    private void upload()
+    {
+        final String key = UUID.randomUUID().toString();    // GUID
+        Bitmap imgPet = getImage();                         // Pet image bitmap
+
+        // Update pet image
+        Service.shared().postPetImage(imgPet, key, new PetImageUploadCallback() {
+            @Override
+            public void didUpload(Boolean success, String img_url) {
+                if (success)
+                {
+                    // Uoload pet and petDetails
+                    Pet pet = getPet(key);
+                    PetDetail petDetail = getPetDetail(key);
+                    Service.shared().postPet(pet);
+                    Service.shared().postPetDetail(petDetail);
+
+                    // Show dialog
+                    DialogFragment newFragment = new MissingDialogFlagment("Updated", "your pet informaion updated");
+                    newFragment.show(getFragmentManager(), "post_timeline: succeed");
+                }
+                else
+                {
+                    DialogFragment newFragment = new MissingDialogFlagment("Error", "Failed to upload data. Please try again");
+                    newFragment.show(getFragmentManager(), "failed_upload");
                 }
             }
         });
@@ -237,17 +269,35 @@ public class PostActivity extends AppCompatActivity
         return true;
     }
 
-    private Pet getPet()
+    private Pet getPet(String key)
     {
         Pet p = new Pet();
-
+        p.id = key;
+        p.img_url = key + ".jpg";
+        p.name = mNameEditText.getText().toString();
+        p.breed = "Hound";
+        p.age = mAgeEditText.getText().toString();
         return  p;
     }
 
-    private PetDetail getPetDetail()
+    private PetDetail getPetDetail(String key)
     {
         PetDetail p = new PetDetail();
+        p.id = key;
+        p.img_url = key + ".jpg";
+        p.about = mDescriptionEditText.getText().toString();
+        p.sex = 0;
+        p.owner_type = 0;
+        p.other_pets = true;
+        p.contact = "xxx@gmail.com";
         return  p;
+    }
+
+    private Bitmap getImage()
+    {
+        mPetImgv.setDrawingCacheEnabled(true);
+        mPetImgv.buildDrawingCache();
+        return mPetImgv.getDrawingCache();
     }
 
     @Override

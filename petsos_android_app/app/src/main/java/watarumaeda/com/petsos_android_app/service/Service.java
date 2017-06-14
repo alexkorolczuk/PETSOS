@@ -2,6 +2,7 @@ package watarumaeda.com.petsos_android_app.service;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -23,6 +24,7 @@ import watarumaeda.com.petsos_android_app.common.PetCallback;
 import watarumaeda.com.petsos_android_app.common.PetDetailCallback;
 import watarumaeda.com.petsos_android_app.common.PetDetailsCallback;
 import watarumaeda.com.petsos_android_app.common.PetImageCallback;
+import watarumaeda.com.petsos_android_app.common.PetImageUploadCallback;
 import watarumaeda.com.petsos_android_app.common.PetsCallback;
 import watarumaeda.com.petsos_android_app.model.Pet;
 import watarumaeda.com.petsos_android_app.model.PetDetail;
@@ -34,6 +36,9 @@ public class Service
     public static Service shared() {
         return instance;
     }
+
+    // Tag
+    private static final String TAG = "[Service.java]";
 
     // Initialization
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -79,7 +84,7 @@ public class Service
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Log.w("getUser:onCancelled", databaseError.toException());
+                        Log.w(TAG + "getUser:onCancelled", databaseError.toException());
                         callback.getPetCallback(false, new Pet());
                     }
                 }
@@ -114,7 +119,7 @@ public class Service
                     {
                         ArrayList<PetDetail> petDetails = new ArrayList<PetDetail>();
                         for (DataSnapshot child : dataSnapshot.getChildren())  {
-                            Log.d("Child", child.getValue().toString());
+                            Log.d(TAG + "Pet", child.getValue().toString());
                             petDetails.add(child.getValue(PetDetail.class));
                         }
                         callback.getPetDetailssCallback(true, petDetails);
@@ -129,7 +134,7 @@ public class Service
     }
 
     // Storage
-    public void postPetImage(Bitmap bitmap, String key)
+    public void postPetImage(Bitmap bitmap, String key, final PetImageUploadCallback callback)
     {
         StorageReference ref = storageRef.child(key + ".jpg");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -141,12 +146,16 @@ public class Service
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
+                Log.d(TAG + "upload_image: failed", exception.toString());
+                callback.didUpload(false, "");
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-//                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                Log.d(TAG + "upload_image: success", downloadUrl.toString());
+                callback.didUpload(true, downloadUrl.toString());
             }
         });
     }

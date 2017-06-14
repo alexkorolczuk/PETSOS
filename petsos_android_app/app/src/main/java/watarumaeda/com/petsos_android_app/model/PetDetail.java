@@ -32,18 +32,18 @@ public class PetDetail
     }
 
     // Parse json data to petDrtail data class
-    public static ArrayList<PetDetail> getTestPetsDetail()
-    {
-        ArrayList<PetDetail> pets = new ArrayList<PetDetail>();
-        pets.add(new PetDetail("1", "cat1.jpg", "Hartworm negative! vacconated & dewormed!", 1, 0, true, 1, "abc@gmail.com"));
-        pets.add(new PetDetail("2", "cat2.jpg", "Hartworm negative! vacconated & dewormed!", 0, 1, false, 0, "cde@gmail.com"));
-        pets.add(new PetDetail("3", "cat3.jpg", "Hartworm negative! vacconated & dewormed!", 0, 1, true, 1, "fgh@gmail.com"));
-        pets.add(new PetDetail("4", "cat4.jpg", "Hartworm negative! vacconated & dewormed!", 1, 0, false, 1, "ijk@gmail.com"));
-        pets.add(new PetDetail("5", "cat5.jpg", "Hartworm negative! vacconated & dewormed!", 0, 1, true, 0, "lmn@gmail.com"));
-        pets.add(new PetDetail("6", "cat6.jpg", "Hartworm negative! vacconated & dewormed!", 1, 1, false, 1, "ogp@gmail.com"));
-        for (PetDetail p : pets) Service.shared().postPetDetail(p);
-        return  pets;
-    }
+//    public static ArrayList<PetDetail> getTestPetsDetail()
+//    {
+//        ArrayList<PetDetail> pets = new ArrayList<PetDetail>();
+//        pets.add(new PetDetail("1", "cat1.jpg", "Hartworm negative! vacconated & dewormed!", 1, 0, true, 1, "abc@gmail.com"));
+//        pets.add(new PetDetail("2", "cat2.jpg", "Hartworm negative! vacconated & dewormed!", 0, 1, false, 0, "cde@gmail.com"));
+//        pets.add(new PetDetail("3", "cat3.jpg", "Hartworm negative! vacconated & dewormed!", 0, 1, true, 1, "fgh@gmail.com"));
+//        pets.add(new PetDetail("4", "cat4.jpg", "Hartworm negative! vacconated & dewormed!", 1, 0, false, 1, "ijk@gmail.com"));
+//        pets.add(new PetDetail("5", "cat5.jpg", "Hartworm negative! vacconated & dewormed!", 0, 1, true, 0, "lmn@gmail.com"));
+//        pets.add(new PetDetail("6", "cat6.jpg", "Hartworm negative! vacconated & dewormed!", 1, 1, false, 1, "ogp@gmail.com"));
+//        for (PetDetail p : pets) Service.shared().postPetDetail(p);
+//        return  pets;
+//    }
 
     // Supporting function
     public Map<String, Object> toMap()
