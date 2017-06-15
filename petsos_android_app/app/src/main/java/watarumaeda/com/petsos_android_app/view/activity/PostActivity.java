@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.provider.SyncStateContract;
 import android.support.annotation.IdRes;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
@@ -61,12 +63,22 @@ public class PostActivity extends AppCompatActivity
 
     private Button mBtnPost;
 
+    private TextView mAddPhoto;
+    private TextView mAddName;
+    private TextView mAddSex;
+    private TextView mAddAge;
+    private TextView mAddOwnerType;
+    private TextView mAddSize;
+    private TextView mAddOK;
+    private TextView mAddDescription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.animaton_button);
         setContentView(R.layout.activity_post);
+        setFontTitle();
 
         //-----------add photo button + animation----------------
         mPetImgv = (ImageView) findViewById(R.id.pet_imgv);
@@ -212,10 +224,12 @@ public class PostActivity extends AppCompatActivity
 
         // ----- Post pet -------
         mBtnPost = (Button) findViewById(R.id.btn_post);
+        mButton.setAnimation(myAnim);
         mBtnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (canPost()) upload();
+                v.startAnimation(myAnim);
             }
         });
     }
@@ -319,4 +333,35 @@ public class PostActivity extends AppCompatActivity
             Toast.makeText(PostActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
         }
     }
+    private void setFontTitle() {
+
+        mAddAge = (TextView) findViewById(R.id.adding_photo);
+        mAddPhoto = (TextView) findViewById(R.id.adding_photo);
+        mAddName = (TextView) findViewById(R.id.adding_name);
+        mAddSex = (TextView) findViewById(R.id.adding_sex);
+        mAddAge = (TextView) findViewById(R.id.adding_age);
+        mAddOwnerType = (TextView) findViewById(R.id.add_owner_type);
+        mAddSize= (TextView) findViewById(R.id.adding_size);
+        mAddOK = (TextView) findViewById(R.id.add_is_OK);
+        mAddDescription = (TextView) findViewById(R.id.adding_description);
+        mBtnPost = (Button) findViewById(R.id.btn_post);
+
+
+
+        Typeface typeFace = Typeface.createFromAsset((getAssets()), "font/Amatic-Bold.ttf");
+        mAddAge.setTypeface(typeFace);
+        mAddPhoto.setTypeface(typeFace);
+        mAddName.setTypeface(typeFace);
+        mAddSex.setTypeface(typeFace);
+        mAddAge.setTypeface(typeFace);
+        mAddOwnerType.setTypeface(typeFace);
+        mAddSize.setTypeface(typeFace);
+        mAddOK.setTypeface(typeFace);
+        mAddDescription.setTypeface(typeFace);
+        mBtnPost.setTypeface(typeFace);
+
+    }
+
+
 }
+

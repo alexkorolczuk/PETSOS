@@ -3,6 +3,7 @@ package watarumaeda.com.petsos_android_app.view.activity;
 import android.Manifest;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
+    TextView name;
+    public static Typeface fonts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,11 +44,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // RecyclerView initialization
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
 
         // Show timeline
         setTimelineData();
@@ -58,9 +64,13 @@ public class MainActivity extends AppCompatActivity
                 // Go to post screen
                 Intent intent = new Intent(v.getContext(), PostActivity.class);
                 v.getContext().startActivity(intent);
+
+
             }
         });
+
     }
+
 
     @Override
     protected void onResume() {
@@ -93,6 +103,9 @@ public class MainActivity extends AppCompatActivity
                     newFragment.show(getFragmentManager(), "get_timeline: failed");
                 }
             }
-        });
+        });}
+
+
+
     }
-}
+

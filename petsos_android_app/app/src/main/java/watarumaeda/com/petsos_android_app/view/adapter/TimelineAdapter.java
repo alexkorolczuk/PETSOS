@@ -2,6 +2,7 @@ package watarumaeda.com.petsos_android_app.view.adapter;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import watarumaeda.com.petsos_android_app.service.Service;
 import watarumaeda.com.petsos_android_app.model.Pet;
+import watarumaeda.com.petsos_android_app.view.activity.MainActivity;
 import watarumaeda.com.petsos_android_app.view.activity.ProfileActivity;
 import watarumaeda.com.petsos_android_app.R;
 import watarumaeda.com.petsos_android_app.common.PetImageCallback;
@@ -35,7 +39,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     public TimelineAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pet_card, parent, false);
+
         return new ViewHolder(view);
+
     }
 
     @Override
@@ -70,6 +76,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         public TextView mName;
         public TextView mAge;
         public ImageView mImgView;
+        Typeface tf;
+        public TextView mWordAge;
+
 
         public ViewHolder(View itemView)
         {
@@ -77,6 +86,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
             mName = (TextView) itemView.findViewById(R.id.name);
             mAge = (TextView) itemView.findViewById(R.id.age);
+            mWordAge = (TextView) itemView.findViewById(R.id.word_age);
+            tf = Typeface.createFromAsset(itemView.getContext().getAssets(), "font/Amatic-Bold.ttf");
+            this.mName.setTypeface(tf);
+            this.mAge.setTypeface(tf);
+            this.mWordAge.setTypeface(tf);
+
             mImgView = (ImageView) itemView.findViewById(R.id.img);
             mImgView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
@@ -87,4 +102,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             });
         }
     }
+
+
 }
