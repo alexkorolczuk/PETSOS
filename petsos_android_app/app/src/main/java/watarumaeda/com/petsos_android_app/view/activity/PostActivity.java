@@ -1,5 +1,6 @@
 package watarumaeda.com.petsos_android_app.view.activity;
 
+import android.Manifest;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.SyncStateContract;
 import android.support.annotation.IdRes;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,7 +32,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.UUID;
 
-import watarumaeda.com.petsos_android_app.Manifest;
 import watarumaeda.com.petsos_android_app.R;
 import watarumaeda.com.petsos_android_app.common.PetImageUploadCallback;
 import watarumaeda.com.petsos_android_app.model.Pet;
@@ -65,7 +67,7 @@ public class PostActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.animaton_button);
+        final Animation myAnim = AnimationUtils.loadAnimation(PostActivity.this, R.anim.animaton_button);
         setContentView(R.layout.activity_post);
 
         //-----------add photo button + animation----------------
@@ -305,18 +307,31 @@ public class PostActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            try {
-                final Uri imageUri = data.getData();
-                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                mPetImgv.setImageBitmap(selectedImage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Toast.makeText(PostActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+
+        // Permission allowed
+        if (ContextCompat.checkSelfPermission(PostActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                PackageManager.PERMISSION_GRANTED) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    Uri imageUri = data.getData();
+                    InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    mPetImgv.setImageBitmap(selectedImage);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    Toast.makeText(PostActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(PostActivity.this, "You haven't picked Image", Toast.LENGTH_LONG).show();
             }
-        }else {
-            Toast.makeText(PostActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+        }
+        // Permission denied
+        else {
+            ActivityCompat.requestPermissions(PostActivity.this, new String[]
+                    {Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+
+            DialogFragment newFragment = new MissingDialogFlagment("Access denied", "Please change setting of permission in the app.");
+            newFragment.show(getFragmentManager(), "missing_name");
         }
     }
 }

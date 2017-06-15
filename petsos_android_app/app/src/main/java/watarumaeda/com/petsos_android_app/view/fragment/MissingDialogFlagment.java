@@ -25,10 +25,8 @@ public class MissingDialogFlagment extends DialogFragment
     }
 
     @Override
-    public void onPause() {
+        public void onPause() {
         super.onPause();
-
-        // onPause でダイアログを閉じる場合
         dismiss();
     }
 }
