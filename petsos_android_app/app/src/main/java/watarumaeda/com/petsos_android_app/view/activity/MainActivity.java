@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity
         setTimelineData();
     }
 
-
     private void setTimelineData()
     {
         // Fetch pets data from database
@@ -78,6 +77,10 @@ public class MainActivity extends AppCompatActivity
             {
                 if (success)
                 {
+                    if (mRecyclerView.getAdapter() != null) {
+                        if (pets.size() == mRecyclerView.getAdapter().getItemCount()) return;
+                    }
+
                     // Set data
                     Collections.reverse(pets);
                     mAdapter = new TimelineAdapter(pets);
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else
                 {
-                    // TODO: Show error message
+                    // Show error message
                     DialogFragment newFragment = new MissingDialogFlagment("Unable to get data", "Please make sure your network and try again");
                     newFragment.show(getFragmentManager(), "get_timeline: failed");
                 }

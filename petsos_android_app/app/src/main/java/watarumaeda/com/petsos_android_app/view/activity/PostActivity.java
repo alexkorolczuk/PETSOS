@@ -68,7 +68,6 @@ public class PostActivity extends AppCompatActivity
         final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.animaton_button);
         setContentView(R.layout.activity_post);
 
-
         //-----------add photo button + animation----------------
         mPetImgv = (ImageView) findViewById(R.id.pet_imgv);
         mButton = (ImageButton) findViewById(R.id.plus_button);
