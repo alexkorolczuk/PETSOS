@@ -3,11 +3,14 @@ package watarumaeda.com.petsos_android_app.view.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -86,6 +89,16 @@ public class ProfileActivity extends AppCompatActivity
         final TextView mTxtvOwnerType = (TextView) findViewById(R.id.owner_type);
         final TextView mTxtvOtherPets = (TextView) findViewById(R.id.other_pets);
         final TextView mTxtvSize = (TextView) findViewById(R.id.size);
+        final TextView mTxtvContact = (TextView) findViewById(R.id.contact);
+
+        Typeface typeFace = Typeface.createFromAsset((getAssets()), "font/Amatic-Bold.ttf");
+        mTxtvName.setTypeface(typeFace);
+        mTxtvAge.setTypeface(typeFace);
+        mTxtvSex.setTypeface(typeFace);
+        mTxtvOwnerType.setTypeface(typeFace);
+        mTxtvOtherPets.setTypeface(typeFace);
+        mTxtvSize.setTypeface(typeFace);
+        mTxtvContact.setTypeface(typeFace);
 
         // Get pet summary data -> set to components
         Service.shared().getPetDetail(id, new PetDetailCallback() {
@@ -106,13 +119,15 @@ public class ProfileActivity extends AppCompatActivity
     // Action
     private void addActions()
     {
-        Button btnAbout = (Button)findViewById(R.id.btn_share_me);
+
         Button btnAdopt = (Button)findViewById(R.id.btn_adopt_me);
-        btnAbout.setOnClickListener(new View.OnClickListener()  {
-            @Override  public void onClick(View v) { callMailer(); }
-        });
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.animaton_button);
+        Typeface typeFace = Typeface.createFromAsset((getAssets()), "font/Amatic-Bold.ttf");
+        btnAdopt.setTypeface(typeFace);
+        btnAdopt.setAnimation(myAnim);
         btnAdopt.setOnClickListener(new View.OnClickListener()  {
-            @Override  public void onClick(View v) { callMailer(); }
+            @Override  public void onClick(View v) { callMailer();
+                v.startAnimation(myAnim);  }
         });
     }
 

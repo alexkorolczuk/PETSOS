@@ -60,46 +60,12 @@
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:textColor="@color/darkGray"
-                        android:textSize="20dp"
+                        android:textSize="40dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginBottom="5dp"
                         android:gravity="bottom" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="75dp">
-
-                        <Button
-                            android:text="About Me"
-                            android:id="@+id/btn_about_me"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@color/cyan"
-                            android:textColor="@color/white"
-                            android:textSize="20dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_weight="1"/>
-
-                        <Button
-                            android:text="Share Me"
-                            android:id="@+id/btn_share_me"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@color/cyan"
-                            android:textColor="@color/white"
-                            android:textSize="20dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_weight="1"/>
-                    </LinearLayout>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -135,7 +101,7 @@
                     <TextView
                         android:text="he domestic cat[1][5] (Latin: Felis catus) is a small, typically furry, carnivorous mammal. They are often called house cats when kept as indoor pets or simply cats when there is no need to distinguish them from other felids and felines.[6] Cats are often valued by humans for companionship and for their ability to hunt vermin."
                         android:id="@+id/about"
-                        android:textSize="15dp"
+                        android:textSize="20dp"
                         android:textColor="@color/lightGray"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="15dp"
@@ -153,7 +119,7 @@
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 card_view:cardCornerRadius="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
@@ -162,7 +128,7 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="209dp">
 
                     <TextView
                         android:text="Details"
@@ -184,7 +150,7 @@
                         <TextView
                             android:text="Sex:"
                             android:textColor="@color/darkGray"
-                            android:textSize="18dp"
+                            android:textSize="20dp"
                             android:textAlignment="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -194,17 +160,17 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:text="Male"
                             android:id="@+id/sex"
-                            android:textColor="@color/lightGray"
-                            android:textSize="18dp"
-                            android:textAlignment="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginTop="5dp"
+                            android:text="Male"
+                            android:textAlignment="center"
+                            android:textColor="@color/lightGray"
+                            android:textSize="24sp" />
 
                     </LinearLayout>
 
@@ -216,7 +182,7 @@
                         <TextView
                             android:text="Owner type:"
                             android:textColor="@color/darkGray"
-                            android:textSize="18dp"
+                            android:textSize="20dp"
                             android:textAlignment="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -226,17 +192,17 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:text="Shelter"
                             android:id="@+id/owner_type"
-                            android:textColor="@color/lightGray"
-                            android:textSize="18dp"
-                            android:textAlignment="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginTop="5dp"
+                            android:text="Shelter"
+                            android:textAlignment="center"
+                            android:textColor="@color/lightGray"
+                            android:textSize="24sp" />
 
                     </LinearLayout>
 
@@ -248,7 +214,7 @@
                         <TextView
                             android:text="Other pets:"
                             android:textColor="@color/darkGray"
-                            android:textSize="18dp"
+                            android:textSize="20dp"
                             android:textAlignment="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -258,17 +224,17 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:text="OK"
                             android:id="@+id/other_pets"
-                            android:textColor="@color/lightGray"
-                            android:textSize="18dp"
-                            android:textAlignment="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginTop="5dp"
+                            android:text="OK"
+                            android:textAlignment="center"
+                            android:textColor="@color/lightGray"
+                            android:textSize="24sp" />
 
                     </LinearLayout>
 
@@ -280,7 +246,7 @@
                         <TextView
                             android:text="Size type:"
                             android:textColor="@color/darkGray"
-                            android:textSize="18dp"
+                            android:textSize="20dp"
                             android:textAlignment="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -290,17 +256,17 @@
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
-                            android:text="Medium"
                             android:id="@+id/size"
-                            android:textColor="@color/lightGray"
-                            android:textSize="18dp"
-                            android:textAlignment="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginTop="5dp"
+                            android:text="Medium"
+                            android:textAlignment="center"
+                            android:textColor="@color/lightGray"
+                            android:textSize="24sp" />
 
                     </LinearLayout>
 
@@ -336,9 +302,10 @@
                         android:layout_marginBottom="5dp" />
 
                     <TextView
-                        android:text="CODY'S FRIENDS ADDISON"
+                        android:text="Vancouver Shelter"
                         android:textColor="@color/darkGray"
-                        android:textSize="20dp"
+                        android:textSize="30dp"
+                        android:id="@+id/contact"
                         android:textAlignment="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -362,14 +329,14 @@
                     android:text="Adopt Me"
                     android:id="@+id/btn_adopt_me"
                     android:layout_centerHorizontal="true"
-                    android:layout_width="200dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/cyan"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:textSize="40sp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/round_button"
+                    android:textColor="@color/white"/>
 
             </RelativeLayout>
         </LinearLayout>
